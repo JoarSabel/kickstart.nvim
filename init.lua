@@ -41,8 +41,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.g.netrw_browsex_viewer = "setsid xdg-open"
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.cmd[[hi Normal guibg=NONE ctermbg=NONE]]
+vim.cmd[[hi LineNr guibg=NONE ctermbg=NONE]]
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -170,7 +174,9 @@ require('lazy').setup({
         map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
         map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
         map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+        map('n', '<leader>hP', gs.preview_hunk, { desc = 'preview git hunk' })
+        map('n', '<leader>hn', gs.next_hunk, { desc = 'jump to next git hunk' })
+        map('n', '<leader>hp', gs.prev_hunk, { desc = 'jump to previous git hunk' })
         map('n', '<leader>hb', function()
           gs.blame_line { full = false }
         end, { desc = 'git blame line' })
@@ -189,14 +195,14 @@ require('lazy').setup({
     },
   },
 
-  {
+  --[[ {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'onedark'
     end,
-  },
+  }, ]]
 
   {
     -- Set lualine as statusline
@@ -205,7 +211,8 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'tokyonight',
+        --theme = 'onedark',
         component_separators = '|',
         section_separators = '',
       },
@@ -218,7 +225,16 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
-    opts = {},
+    opts = {
+      exclude={
+        filetypes={
+          "dashboard",
+        },
+        buftypes={
+          "dashboard",
+        },
+      },
+    },
   },
 
   -- "gc" to comment visual regions/lines
@@ -257,6 +273,13 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
+  {
+    "norcalli/nvim-colorizer.lua",
+  },
+  require 'kickstart.plugins.oil',
+  require 'kickstart.plugins.tokyonight',
+  require 'custom.plugins.dasboard',
+  require 'custom.plugins.autopairs',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
@@ -268,7 +291,6 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -278,6 +300,13 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+
+-- Make relative nubmers
+vim.wo.relativenumber = true
+
+ vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#7AA2FF', bold=true })
+ vim.api.nvim_set_hl(0, 'LineNr', { fg='#7AA2FF', bold=true })
+ vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#7AA2FF', bold=true })
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -310,6 +339,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Set colorscheme
+vim.cmd[[colorscheme tokyonight-moon]]
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -319,6 +351,9 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Remap for gx to open url
+vim.keymap.set("n", "gx", [[:silent execute '!xdg-open ' . shellescape(expand('<cfile>'), 1)<CR>]])
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -416,6 +451,10 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>bp', [[:bprevious <CR>]], { desc = '[B]uffer [P]revious' })
+vim.keymap.set('n', '<leader>bn', [[:bnext <CR>]], { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<leader>bc', [[:close <CR>]], { desc = '[B]uffer [C]lose' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -546,6 +585,7 @@ require('which-key').register {
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
