@@ -45,8 +45,9 @@ vim.g.netrw_browsex_viewer = "setsid xdg-open"
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.cmd[[hi Normal guibg=NONE ctermbg=NONE]]
-vim.cmd[[hi LineNr guibg=NONE ctermbg=NONE]]
+--vim.cmd[[hi Normal guibg=NONE ctermbg=NONE]]
+--vim.cmd[[hi NonText guibg=NONE ctermbg=NONE]]
+--vim.cmd[[hi LineNr guibg=NONE ctermbg=NONE]]
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -92,7 +93,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {notification = {window = {winblend=0, relative = "editor"}}}},
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -211,7 +212,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'tokyonight',
+        --theme = 'tokyonight',
         --theme = 'onedark',
         component_separators = '|',
         section_separators = '',
@@ -277,9 +278,12 @@ require('lazy').setup({
     "norcalli/nvim-colorizer.lua",
   },
   require 'kickstart.plugins.oil',
-  require 'kickstart.plugins.tokyonight',
+  -- require 'kickstart.plugins.tokyonight',
+  require 'kickstart.plugins.nightfox',
+  -- require 'custom.plugins.noice',
   require 'custom.plugins.dasboard',
   require 'custom.plugins.autopairs',
+  require 'custom.plugins.markdownPreview',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
@@ -340,8 +344,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Set colorscheme
-vim.cmd[[colorscheme tokyonight-moon]]
-
+-- vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme nordfox]]
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
