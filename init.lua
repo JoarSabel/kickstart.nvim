@@ -976,6 +976,7 @@ require('lazy').setup({
   require 'kickstart.plugins.nightfox',
   -- require 'custom.plugins.noice',
   require 'custom.plugins.dasboard',
+  -- require 'custom.plugins.gen',
   require 'custom.plugins.markdownPreview',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
