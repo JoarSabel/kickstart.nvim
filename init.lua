@@ -283,6 +283,7 @@ require('lazy').setup({
   -- require 'custom.plugins.noice',
   require 'custom.plugins.dasboard',
   require 'custom.plugins.autopairs',
+  require 'custom.plugins.gen',
   require 'custom.plugins.markdownPreview',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
