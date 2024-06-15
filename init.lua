@@ -62,6 +62,19 @@ vim.o.updatetime = 250
 -- Decrease mapped sequence wait time
 vim.o.timeoutlen = 300
 
+-- Set spellcheck on
+vim.wo.spell = true
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+-- NOTE: You should make sure your terminal supports this
+vim.o.termguicolors = true
+
+-- Set colorscheme
+-- vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme nordfox]]
+
 -- Configure how new splits should be opened
 vim.o.splitright = true
 vim.o.splitbelow = false
@@ -977,7 +990,10 @@ require('lazy').setup({
   -- require 'custom.plugins.noice',
   require 'custom.plugins.dasboard',
   -- require 'custom.plugins.gen',
+  -- require 'custom.plugins.luarocks',
+  require 'custom.plugins.neorg',
   require 'custom.plugins.markdownPreview',
+  require 'custom.plugins.typst-vim',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
