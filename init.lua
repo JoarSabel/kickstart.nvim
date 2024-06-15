@@ -282,9 +282,12 @@ require('lazy').setup({
   require 'kickstart.plugins.nightfox',
   -- require 'custom.plugins.noice',
   require 'custom.plugins.dasboard',
+  require 'custom.plugins.luarocks',
+  require 'custom.plugins.neorg',
   require 'custom.plugins.autopairs',
   require 'custom.plugins.gen',
   require 'custom.plugins.markdownPreview',
+  require 'custom.plugins.typst-vim',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
@@ -302,6 +305,9 @@ require('lazy').setup({
 
 -- Set highlight on search
 vim.o.hlsearch = false
+
+-- Set spellcheck on
+vim.wo.spell = true
 
 -- Make line numbers default
 vim.wo.number = true
