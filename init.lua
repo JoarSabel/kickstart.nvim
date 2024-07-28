@@ -5,9 +5,6 @@ vim.g.netrw_browsex_viewer = 'setsid xdg-open'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
-vim.cmd [[hi LineNr guibg=NONE ctermbg=NONE]]
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -68,13 +65,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- Set colorscheme
--- vim.cmd[[colorscheme tokyonight-moon]]
--- vim.cmd[[colorscheme nordfox]]
-
 -- Configure how new splits should be opened
 vim.opt.splitright = true
-vim.opt.splitbelow = false
+vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -361,7 +354,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, relative = 'editor' } } } },
 
       -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
@@ -875,7 +868,7 @@ require('lazy').setup({
   require 'custom.plugins.dasboard',
   -- require 'custom.plugins.gen',
   -- require 'custom.plugins.luarocks',
-  -- require 'custom.plugins.neorg',
+  require 'custom.plugins.neorg',
   require 'custom.plugins.markdownPreview',
   require 'custom.plugins.typst-vim',
   -- require 'kickstart.plugins.autoformat',
