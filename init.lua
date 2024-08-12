@@ -546,43 +546,6 @@ require('lazy').setup({
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-          -- Lesser used LSP functionality
-          -- nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          -- nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-          -- nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-          -- nmap('<leader>wl', function()
-          --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          -- end, '[W]orkspace [L]ist Folders')
-
-          -- -- Create a command `:Format` local to the LSP buffer
-          -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-          --   vim.lsp.buf.format()
-          -- end, { desc = 'Format current buffer with LSP' })
-          -- end
-
-          -- -- document existing key chains
-          -- require('which-key').register {
-          --   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-          --   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-          --   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-          --   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-          --   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-          --   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-          --   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-          --   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-          --   ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
-          -- }
-          -- -- register which-key VISUAL mode
-          -- -- required for visual <leader>hs (hunk stage) to work
-          -- require('which-key').register({
-          --   ['<leader>'] = { name = 'VISUAL <leader>' },
-          --   ['<leader>h'] = { 'Git [H]unk' },
-          -- }, { mode = 'v' })
-
-          -- -- mason-lspconfig requires that these setup functions are called in this order
-          -- -- before setting up the servers.
-          -- require('mason').setup()
-          -- require('mason-lspconfig').setup()
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -877,28 +840,6 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-
-  -- { -- You can easily change to a different colorscheme.
-  --   -- Change the name of the colorscheme plugin below, and then
-  --   -- change the command in the config to whatever the name of that colorscheme is.
-  --   --
-  --   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000, -- Make sure to load this before all the other start plugins.
-  --   config = function()
-  --     ---@diagnostic disable-next-line: missing-fields
-  --     require('tokyonight').setup {
-  --       styles = {
-  --         comments = { italic = false }, -- Disable italics in comments
-  --       },
-  --     }
-
-  --     -- Load the colorscheme here.
-  --     -- Like many other themes, this one has different styles, and you could load
-  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  --     vim.cmd.colorscheme 'tokyonight-night'
-  --   end,
-  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
