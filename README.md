@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Personal fork of [kickastart.nvim](https://github.com/nvim-lua/kickstart.nvim), ment to be kept small but functional. 
+Personal fork of [kickastart.nvim](https://github.com/nvim-lua/kickstart.nvim), meant to be kept small but functional. 
 
 Kickstart.nvim targets *only* the latest
 ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
