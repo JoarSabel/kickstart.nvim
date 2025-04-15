@@ -5,6 +5,14 @@ vim.g.netrw_browsex_viewer = 'setsid xdg-open'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.filetype.add {
+  extension = {
+    c3 = 'c3',
+    c3i = 'c3',
+    c3t = 'c3',
+  },
+}
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -649,6 +657,16 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
+        ltex = {
+          filetypes = { 'latex', 'typst', 'typ', 'bib', 'markdown', 'plaintex', 'tex' },
+          settings = {
+            ltex = {
+              language = 'en',
+              checkFrequency = 'save',
+              enabled = { 'latex', 'typst', 'typ', 'bib', 'markdown', 'plaintex', 'tex' },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -764,12 +782,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
         opts = {},
       },
@@ -929,6 +947,7 @@ require('lazy').setup({
   require 'custom.plugins.markview',
   require 'custom.plugins.neorg',
   require 'custom.plugins.typst-vim',
+  require 'custom.plugins.img-clip',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
