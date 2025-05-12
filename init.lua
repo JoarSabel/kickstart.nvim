@@ -5,14 +5,6 @@ vim.g.netrw_browsex_viewer = 'setsid xdg-open'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.filetype.add {
-  extension = {
-    c3 = 'c3',
-    c3i = 'c3',
-    c3t = 'c3',
-  },
-}
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -25,13 +17,11 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
+-- Make relative numbers
 vim.o.relativenumber = true
--- vim.opt.relativenumber = true
--- Make relative nubmers
--- vim.wo.relativenumber = true
 
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#7AA2FF', bold = true })
-vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7AA2FF', bold = true })
+-- vim.api.nvim_set_hl(0, 'LineNr', { fg = '#7AA2FF', bold = true })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#7AA2FF', bold = true })
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -78,7 +68,7 @@ vim.o.termguicolors = true
 
 -- Configure how new splits should be opened
 vim.o.splitright = true
-vim.o.splitbelow = false
+vim.o.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -560,7 +550,7 @@ require('lazy').setup({
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          -- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -949,7 +939,7 @@ require('lazy').setup({
   -- require 'custom.plugins.gen',
   -- require 'custom.plugins.luarocks',
   -- require 'custom.plugins.markview',
-  require 'custom.plugins.neorg',
+  -- require 'custom.plugins.neorg',
   require 'custom.plugins.typst-vim',
   require 'custom.plugins.img-clip',
   -- require 'kickstart.plugins.autoformat',
